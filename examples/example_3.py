@@ -12,9 +12,6 @@ from typing import Union
 
 
 class CustomRaisedKernel(RaisedKernel):
-    KERNELS = RaisedKernel.KERNELS + [
-        'gaussian'
-    ]
 
     def _gaussian_kernel(self, z: Union[float, int]) -> Union[float, int]:
         """Uniform kernel"""

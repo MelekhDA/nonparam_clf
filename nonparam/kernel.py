@@ -9,23 +9,20 @@ __all__ = [
 class RaisedKernel:
     """Kernel function"""
 
-    KERNELS = [
-        'uniform', 'traingular',
-        'parabolic', 'cubic'
-    ]
-
-    def __init__(self, kernel, epsi=1e-2):
-        assert kernel in self.KERNELS, f'Select a kernel from the list {RaisedKernel.KERNELS}'
-
+    def __init__(self, kernel: str, epsi: float = 1e-2):
         self._epsi = epsi
-        self._kernel = getattr(self, f'_{kernel}_kernel')
+
+        try:
+            self._kernel = getattr(self, f'_{kernel}_kernel')
+        except AttributeError:
+            raise Exception('Choose one of the existing kernels')
 
     @property
-    def epsi(self):
+    def epsi(self) -> float:
         return self._epsi
 
     @epsi.setter
-    def epsi(self, epsi):
+    def epsi(self, epsi: float):
         self._epsi = epsi
 
     def kernel(self, z: Union[float, int]) -> Union[float, int]:
